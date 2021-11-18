@@ -111,19 +111,22 @@ for (const toy of toys) {
   }
 }
 
-//function for removing a product from the inventory, including in toyPrices map
+//function for removing a toy from inventory. Also removes from toyPrices map
 const removeProduct = (id) => {
-  for (let i = 0; i < toys.length; i++) {
-    if (toys[i].id === id) {
-      console.log(`removing ${toys[i].name}`);
-      toys.splice(i, 1);
-      break;
+  for (const toy of toys) {
+    if(toy.id === id) {
+      console.log("this is a toy:", toy)
+      toyPrices.delete(toy);
+      console.log(`removing ${toy.name}`);
+      toys.delete(toy);
     }
   }
-};
+}
 
 removeProduct(2);
 
+
+//log out all toy and toy prices
 for (let [toyObj, price] of toyPrices) {
   console.log(`${toyObj.name} costs $${price}.`);
 }
