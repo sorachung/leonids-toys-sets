@@ -1,5 +1,7 @@
+//make new set toys to be filled with unique toy objects
 const toys = new Set();
 
+//toy objects to add to toys set
 const woodenBlocks = {
   id: 1,
   inStock: true,
@@ -72,27 +74,10 @@ const uno = {
   battery: false,
 };
 
-// toys.push(rubiksCube);
-// toys.push(giantGiraffe);
-
-// for (const toy of toys) {
-//   console.log(`The ${toy.name} by ${toy.brand} is $${toy.price}`);
-// }
-
-// for (const toy of toys) {
-//   toy.price *= 1.05;
-//   console.log(`The ${toy.name} costs $${toy.price}`);
-// }
-
-const toyToFind = 2;
-
-// for (const toy of toys) {
-//   if (toy.id === toyToFind) {
-//     console.log(toy.name, toy);
-//   }
-// }
+//create map with toy object-prices as the key-value pairs
 const toyPrices = new Map();
 
+//function for adding a toy to the inventory
 const addToyToInventory = (toyObject, price) => {
   // const index = toys.length - 1
   // const maxId = toys[index].id;
@@ -104,6 +89,7 @@ const addToyToInventory = (toyObject, price) => {
   toyPrices.set(toyObject, price);
 };
 
+//adding all toys to the inventory
 addToyToInventory(woodenBlocks, 5.0);
 addToyToInventory(chess, 10.99);
 addToyToInventory(jigsaw, 3.99);
@@ -111,10 +97,21 @@ addToyToInventory(rubiksCube, 10.99);
 addToyToInventory(giantGiraffe, 79.99);
 addToyToInventory(uno, 5.99);
 
+//log out names of each toy
 const toyNames = [];
 toys.forEach((toy) => toyNames.push(toy.name));
 console.log(toyNames);
 
+//find a specific toy by id
+const toyToFind = 2;
+
+for (const toy of toys) {
+  if (toy.id === toyToFind) {
+    console.log("toy found:", toy.name);
+  }
+}
+
+//function for removing a product from the inventory, including in toyPrices map
 const removeProduct = (id) => {
   for (let i = 0; i < toys.length; i++) {
     if (toys[i].id === id) {
@@ -125,29 +122,10 @@ const removeProduct = (id) => {
   }
 };
 
-// const removeProduct2 = (id) => {
-//   for (let i = 0; id >= toys[i].id; i++) {
-//     console.log(i)
-//     if(toys[i].id === id) {
-//       console.log(`removing ${toys[i].name}`)
-//       toys.splice(i, 1)
-//     }
-//   }
-
-// }
-
 removeProduct(2);
-// removeProduct2(2)
-// console.log(toys);
-
-// for (const toy of toys) {
-//   console.log(`${toy.name} costs $${toyPrices.get(toy)}`)
-// }
 
 for (let [toyObj, price] of toyPrices) {
   console.log(`${toyObj.name} costs $${price}.`);
 }
 
-// toyPrices.forEach((price, toyObj) => {
-//   console.log(`${toyObj.name} costs $${price}.`);
-// });
+
