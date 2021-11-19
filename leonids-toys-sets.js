@@ -79,11 +79,20 @@ const toyPrices = new Map();
 
 //function for adding a toy to the inventory
 const addToyToInventory = (toyObject, price) => {
-  // const index = toys.length - 1
-  // const maxId = toys[index].id;
-  // const id = maxId + 1;
+  let id;
+  if (toys.size === 0) {
+    id = 1;
+  } else {
+    const iterator1 = toys.values();
+    let lastToy = null;
+    for (const toy of toys) {
+      lastToy = iterator1.next().value;
+      // console.log("iterator value", lastToy)
+    }
+    id = lastToy.id + 1;
+  }
 
-  // toyObject.id = id;
+  toyObject.id = id;
 
   toys.add(toyObject);
   toyPrices.set(toyObject, price);
@@ -96,6 +105,11 @@ addToyToInventory(jigsaw, 3.99);
 addToyToInventory(rubiksCube, 10.99);
 addToyToInventory(giantGiraffe, 79.99);
 addToyToInventory(uno, 5.99);
+
+//log out toy names and ids
+for (const toy of toys) {
+  console.log(`The id of ${toy.name} is ${toy.id}`)
+}
 
 //log out names of each toy
 const toyNames = [];
@@ -114,21 +128,18 @@ for (const toy of toys) {
 //function for removing a toy from inventory. Also removes from toyPrices map
 const removeProduct = (id) => {
   for (const toy of toys) {
-    if(toy.id === id) {
-      console.log("this is a toy:", toy)
+    if (toy.id === id) {
+      console.log("this is a toy:", toy);
       toyPrices.delete(toy);
       console.log(`removing ${toy.name}`);
       toys.delete(toy);
     }
   }
-}
+};
 
 removeProduct(2);
-
 
 //log out all toy and toy prices
 for (let [toyObj, price] of toyPrices) {
   console.log(`${toyObj.name} costs $${price}.`);
 }
-
-
