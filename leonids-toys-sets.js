@@ -141,5 +141,5 @@ removeProduct(2);
 
 //log out all toy and toy prices
 for (let [toyObj, price] of toyPrices) {
-  console.log(`${toyObj.name} costs $${price}.`);
+  console.log(`${toyObj.name} costs $${price.toFixed(2)}.`);
 }
